@@ -26,8 +26,11 @@ let server = http.createServer(function (req, res) {
                 return res.end(err.message);
             }
             let tmpPath = files.avatar.filepath;
+            // Khởi tạo đường dẫn mới, mục đích để lưu file vào thư mục uploads của chúng ta
             let newPath = form.uploadDir + files.avatar.originalFilename;
+            // Tạo thuộc tính avatar và gán giá trị cho nó
             userInfo.avatar = newPath;
+            // Đổi tên của file tạm thành tên mới và lưu lại
             fs.rename(tmpPath, newPath, (err) => {
                 if (err) throw err;
                 let fileType = files.avatar.mimeType;

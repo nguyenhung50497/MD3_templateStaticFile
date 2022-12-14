@@ -18,7 +18,8 @@ let server = http.createServer(function (req, res) {
             let userInfo = {
                 name: fields.name,
                 email: fields.email,
-                password: fields.password,
+                phone: fields.phone,
+                address
             };
 
             if (err) {

@@ -13,12 +13,13 @@ let server = http.createServer(function (req, res) {
         });
     } else {
         let form = new formidable.IncomingForm();
-        form.uploadDir = "upload/"
+        // form.uploadDir = "upload/"
         form.parse(req, function (err, fields, files) {
             let userInfo = {
                 name: fields.name,
                 email: fields.email,
-                password: fields.password,
+                phone: fields.phone,
+                address: fields.address,
             };
 
             if (err) {

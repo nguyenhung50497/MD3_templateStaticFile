@@ -13,12 +13,12 @@ let server = http.createServer(function (req, res) {
         });
     } else {
         let form = new formidable.IncomingForm();
-        form.uploadDir = "upload/"
         form.parse(req, function (err, fields, files) {
             let userInfo = {
                 name: fields.name,
                 email: fields.email,
-                password: fields.password,
+                phone: fields.phone,
+                address: fields.address,
             };
 
             if (err) {
@@ -26,7 +26,7 @@ let server = http.createServer(function (req, res) {
                 return res.end(err.message);
             }
             let tmpPath = files.avatar.filepath;
-            let newPath = form.uploadDir + files.avatar.originalFilename;
+            let newPath = files.avatar.originalFilename;
             userInfo.avatar = newPath;
             fs.rename(tmpPath, newPath, (err) => {
                 if (err) throw err;

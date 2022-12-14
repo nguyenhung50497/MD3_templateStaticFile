@@ -28,6 +28,7 @@ let server = http.createServer(function (req, res) {
             let tmpPath = files.avatar.filepath;
             let newPath = form.uploadDir + files.avatar.originalFilename;
             userInfo.avatar = newPath;
+            // Đổi tên của file tạm thành tên mới và lưu lại
             fs.rename(tmpPath, newPath, (err) => {
                 if (err) throw err;
                 let fileType = files.avatar.mimeType;

@@ -13,30 +13,18 @@ let server = http.createServer(function (req, res) {
         });
     } else {
         let form = new formidable.IncomingForm();
-        form.uploadDir = "upload/"
         form.parse(req, function (err, fields, files) {
             let userInfo = {
                 name: fields.name,
                 email: fields.email,
-                password: fields.password,
+                phone: fields.phone,
+                address: fields.address,
             };
 
             if (err) {
                 console.error(err.message);
                 return res.end(err.message);
             }
-            let tmpPath = files.avatar.filepath;
-            let newPath = form.uploadDir + files.avatar.originalFilename;
-            userInfo.avatar = newPath;
-            fs.rename(tmpPath, newPath, (err) => {
-                if (err) throw err;
-                let fileType = files.avatar.mimeType;
-                let mimeTypes = ["image/jpeg", "image/jpg", "image/png"];
-                if (mimeTypes.indexOf(fileType) === -1) {
-                    res.writeHead(200, {"Content-Type": "text/html"});
-                    return res.end('The file is not in the correct format: png, jpeg, jpg');
-                }
-            });
             users.push(userInfo);
             console.log(users)
             return res.end('Register success!');
